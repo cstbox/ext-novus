@@ -1,0 +1,99 @@
+{
+    "productname" : "Digirail_2A",
+    "__descr__" : {
+        "*" : "Modbus A/D converter",
+        "fr" : "Convertisseur analogique/numerique"
+    },
+    "supports" : [],
+    "pdefs" : {
+        "root" : {
+            "__seq__" : ["address", "location", "enabled", "polling", "events_ttl"],
+            "polling" : {
+                "type" : "period",
+                "label" : {
+                    "fr" : "Période lecture",
+                    "*" : "Polling period"
+                },
+                "defvalue" : "1m"
+            },
+            "events_ttl" : {
+                "type" : "period",
+                "label" : {
+                    "fr" : "Validité des événements",
+                    "*" : "Events time to live"
+                },
+                "defvalue" : "2h"
+            }
+        },
+        "outputs" : {
+            "__seq__" : [ "in1",         
+                          "in2"],
+            "in1" : {
+                "__seq__" : ["enabled", "delta_min", "full_scale", "real_scale"],
+                "__descr__" : {
+                    "fr" : "Input1",
+                    "*" : "Input1"
+                },
+                "__vartype__" : "generic",
+                "__varunits__" : "",
+                "delta_min" : {
+                    "type" : "int",
+                    "label" : {
+                        "fr" : "Variation minimale",
+                        "*" : "Variation threshold"
+                    },
+                    "defvalue" : 1
+                },
+                "full_scale" : {
+                    "type" : "float",
+                    "label" : {
+                        "fr" : "Valeur pleine échelle",
+                        "*" : "Full scale value"
+                    },
+                    "defvalue" : 1.0
+                },
+                "real_scale" : {
+                    "type" : "float",
+                    "label" : {
+                        "fr" : "Valeur réelle",
+                        "*" : "Real value"
+                    },
+                    "defvalue" : 1.0
+                }
+            },
+            "in2" : {
+                "__seq__" : ["enabled", "delta_min", "full_scale", "real_scale"],
+                "__descr__" : {
+                    "fr" : "Input2",
+                    "*" : "Input2"
+                },
+                "__vartype__" : "generic",
+                "__varunits__" : "",
+                "delta_min" : {
+                    "type" : "int",
+                    "label" : {
+                        "fr" : "Variation minimale",
+                        "*" : "Variation threshold"
+                    },
+                    "defvalue" : 1
+                },
+                "full_scale" : {
+                    "type" : "float",
+                    "label" : {
+                        "fr" : "Valeur pleine échelle",
+                        "*" : "Full scale value"
+                    },
+                    "defvalue" : 1.0
+                },
+                "real_scale" : {
+                    "type" : "float",
+                    "label" : {
+                        "fr" : "Valeur réelle",
+                        "*" : "Real value"
+                    },
+                    "defvalue" : 1.0
+                }
+            }
+        }
+    }
+}
