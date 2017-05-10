@@ -21,7 +21,7 @@
 import logging
 
 import pycstbox.hal.device as haldev
-import pycstbox.digirail_2a.digirail_2a as digirail_2a
+import pycstbox.novus.digirail_2a as digirail_2a
 from pycstbox.hal import hal_device
 
 _logger = logging.getLogger(__file__)
@@ -30,13 +30,13 @@ DEFAULT_PRECISION = 3
 
 
 @hal_device(device_type="novus.digirail_2a", coordinator_type="modbus")
-class DIGIRAIL_2A(haldev.PolledDevice):
+class DigiRail_2A(haldev.PolledDevice):
     """ HAL device modeling the Digirail 2A converter.
 
     The extension adds the support of polling requests and CSTBox events
     publishing on D-Bus.
     """
 
-    def __init__(self, coord, cfg):
-        super(DIGIRAIL_2A, self).__init__(coord, cfg)
-        self._hwdev = digirail_2a.DIGIRAIL_2AInstrument(coord.port, cfg.address, cfg.outputs)
+    def __init__(self, coord_cfg, dev_cfg):
+        super(DigiRail_2A, self).__init__(coord_cfg, dev_cfg)
+        self._hwdev = digirail_2a.DigiRail_2A(coord_cfg.port, dev_cfg.address, dev_cfg.outputs)

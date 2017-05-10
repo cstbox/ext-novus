@@ -1,8 +1,8 @@
 {
     "productname" : "Digirail_2A",
     "__descr__" : {
-        "*" : "Modbus A/D converter",
-        "fr" : "Convertisseur analogique/numerique"
+        "*" : "Universal Modbus A/D converter",
+        "fr" : "Convertisseur analogique/numerique universel"
     },
     "supports" : [],
     "pdefs" : {
@@ -26,10 +26,9 @@
             }
         },
         "outputs" : {
-            "__seq__" : [ "in1",         
-                          "in2"],
+            "__seq__" : [ "in1", "in2"],
             "in1" : {
-                "__seq__" : ["enabled", "delta_min", "full_scale", "real_scale"],
+                "__seq__" : ["enabled", "delta_min"],
                 "__descr__" : {
                     "fr" : "Input1",
                     "*" : "Input1"
@@ -43,26 +42,10 @@
                         "*" : "Variation threshold"
                     },
                     "defvalue" : 1
-                },
-                "full_scale" : {
-                    "type" : "float",
-                    "label" : {
-                        "fr" : "Valeur pleine échelle",
-                        "*" : "Full scale value"
-                    },
-                    "defvalue" : 1.0
-                },
-                "real_scale" : {
-                    "type" : "float",
-                    "label" : {
-                        "fr" : "Valeur réelle",
-                        "*" : "Real value"
-                    },
-                    "defvalue" : 1.0
                 }
             },
             "in2" : {
-                "__seq__" : ["enabled", "delta_min", "full_scale", "real_scale"],
+                "__seq__" : ["enabled", "delta_min"],
                 "__descr__" : {
                     "fr" : "Input2",
                     "*" : "Input2"
@@ -76,22 +59,6 @@
                         "*" : "Variation threshold"
                     },
                     "defvalue" : 1
-                },
-                "full_scale" : {
-                    "type" : "float",
-                    "label" : {
-                        "fr" : "Valeur pleine échelle",
-                        "*" : "Full scale value"
-                    },
-                    "defvalue" : 1.0
-                },
-                "real_scale" : {
-                    "type" : "float",
-                    "label" : {
-                        "fr" : "Valeur réelle",
-                        "*" : "Real value"
-                    },
-                    "defvalue" : 1.0
                 }
             }
         }
