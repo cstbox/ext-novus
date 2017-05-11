@@ -68,6 +68,12 @@ SCALE_DIVISORS = {
     INPUT_TYPE_CURRENT: 1.
 }
 
+INPUT_TYPE_CATEGORY_LABEL = {
+    INPUT_TYPE_TEMPERATURE: 'temperature',
+    INPUT_TYPE_VOLTAGE: 'voltage',
+    INPUT_TYPE_CURRENT: 'current'
+}
+
 
 class DRInput(object):
     """ DigiRail input modeling class """
@@ -177,7 +183,7 @@ class DigiRail_2A(RTUModbusHWDevice):
         if data is None:
             raise HalError("error reading register")
         dev_id = struct.unpack('>H', data)[0]
-        if dev_id != unit_id:
+        if dev_id != self.unit_id:
             raise HalError(
                 "Modbus id stored in config regs does not match (expecting '%d', got '%d')" %
                 (self.unit_id, dev_id)
