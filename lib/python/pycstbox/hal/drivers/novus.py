@@ -20,17 +20,17 @@
 
 import logging
 
-import pycstbox.hal.device as haldev
 import pycstbox.novus.digirail_2a as digirail_2a
 from pycstbox.hal import hal_device
+from pycstbox.modbus import RTUModbusHALDevice
 
-_logger = logging.getLogger(__file__)
+_logger = logging.getLogger('novus')
 
 DEFAULT_PRECISION = 3
 
 
 @hal_device(device_type="novus.digirail_2a", coordinator_type="modbus")
-class DigiRail_2A(haldev.PolledDevice):
+class DigiRail_2A(RTUModbusHALDevice):
     """ HAL device modeling the Digirail 2A converter.
 
     The extension adds the support of polling requests and CSTBox events
@@ -39,4 +39,14 @@ class DigiRail_2A(haldev.PolledDevice):
 
     def __init__(self, coord_cfg, dev_cfg):
         super(DigiRail_2A, self).__init__(coord_cfg, dev_cfg)
-        self._hwdev = digirail_2a.DigiRail_2A(coord_cfg.port, dev_cfg.address, dev_cfg.outputs)
+        self._hwdev = digirail_2a.DigiRail_2A(coord_cfg.port, dev_cfg.address)
+
+        # cache the input type and unit
+        self._output_defs = [
+            (digirail_2a.INPUT_TYPE_CATEGORY_LABEL[i.input_type_category], i.unit)
+            for i in self._hwdev.inputs
+        ]
+
+    def get_output_data_definition(self, output):
+        return self._output_defs[int(output[-1]) - 1]
+
