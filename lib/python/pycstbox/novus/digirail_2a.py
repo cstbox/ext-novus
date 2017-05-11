@@ -177,25 +177,12 @@ class DigiRail_2A(RTUModbusHWDevice):
         """
         super(DigiRail_2A, self).__init__(port=port, unit_id=int(unit_id), logname='dr2a')
 
-        # check that unit id matches
-        self._logger.info('checking unit id...')
-        data = self._read_registers(start_addr=self.REG_MODBUS_ADDR.addr)
-        if data is None:
-            raise HalError("error reading register")
-        dev_id = struct.unpack('>H', data)[0]
-        if dev_id != self.unit_id:
-            raise HalError(
-                "Modbus id stored in config regs does not match (expecting '%d', got '%d')" %
-                (self.unit_id, dev_id)
-            )
-        self._logger.info('... OK')
-
-        self._logger.info('creating unit inputs...')
-
+        self._logger.info('reading inputs configuration from device...')
         input_types = self.unpack_registers(start_register=self.REG_INPUT_TYPE_1, reg_count=2, unpack_format='>hh')
         input_units = self.unpack_registers(start_register=self.REG_MEAS_UNIT_1, reg_count=2, unpack_format='>hh')
-        self.inputs = [DRInput(input_type, input_unit) for input_type, input_unit in zip(input_types, input_units)]
 
+        self._logger.info('creating corresponding model instances...')
+        self.inputs = [DRInput(input_type, input_unit) for input_type, input_unit in zip(input_types, input_units)]
         for n, input in enumerate(self.inputs):
             self._logger.info('... [%d] %s', n + 1, input)
 
